@@ -1,0 +1,134 @@
+class Movie:
+    def __init__(self, movie_id, title, price, release_date, show_times):
+        self.movie_id = movie_id
+        self.title = title
+        self.price = price
+        self.release_date = release_date
+        self.show_times = show_times
+        
+class Theater:
+    def __init__(self, num_rows, num_seats_per_row, movies):
+        self.num_rows = num_rows
+        self.num_seats_per_row = num_seats_per_row
+        self.movies = movies
+        self.seats = [[0 for j in range(num_seats_per_row)] for i in range(num_rows)]
+        self.num_seats = num_rows * num_seats_per_row
+        
+class Booking:
+    def __init__(self, transaction_id, customer_name, date, time, movie_id):
+        self.transaction_id = transaction_id
+        self.customer_name = customer_name
+        self.date = date
+        self.time = time
+        self.movie_id = movie_id
+        
+class BookingSystem:
+    def __init__(self, booking_file, movie_file, theater_file):
+        self.booking_file = booking_file
+        self.movie_file = movie_file
+        self.theater_file = theater_file
+        self.bookings = self.read_bookings()
+        self.movies = self.read_movies()
+        self.theater = self.read_theater()
+
+def display_movies(self):
+        print("Available movies:")
+        for movie in self.movies:
+            print(movie.title)
+            print("Showtimes:")
+            for showtime in movie.show_times:
+                print(showtime)
+            print("------")
+        
+def read_bookings(self):
+    with open(self.booking_file, "r") as file:
+        bookings = []
+        for line in file:
+            fields = line.strip().split(",")
+            transaction_id = fields[0]
+            customer_name = fields[1]
+            date = fields[2]
+            time = fields[3]
+            movie_id = fields[4]
+            booking = Booking(transaction_id, customer_name, date, time, movie_id)
+            bookings.append(booking)
+        return bookings
+    
+def read_movies(self):
+    with open(self.movie_file, "r") as file:
+            movies = []
+    for line in file:
+            fields = line.strip().split(",")
+            movie_id = fields[0]
+            title = fields[1]
+            price = fields[2]
+            release_date = fields[3]
+            show_times = fields[4].split(";")
+            movie = Movie(movie_id, title, price, release_date, show_times)
+            movies.append(movie)
+    return movies
+    
+def read_theater(self):
+    with open(self.theater_file, "r") as file:
+        fields = file.readline().strip().split(",")
+        num_rows = int(fields[0])
+        num_seats_per_row = int(fields[1])
+        movies = []
+        for line in file:
+            fields = line.strip().split(",")
+            movie_id = fields[0]
+            title = fields[1]
+            price = fields[2]
+            release_date = fields[3]
+            show_times = fields[4].split(";")
+            movie = Movie(movie_id, title, price, release_date, show_times)
+            movies.append(movie)
+        theater = Theater(num_rows, num_seats_per_row, movies)
+        return theater
+    
+def write_booking(self, booking):
+    with open(self.booking_file, "a") as file:
+        file.write(f"{booking.transaction_id},{booking.customer_name},{booking.date},{booking.time},{booking.movie_id}\n")
+        
+def write_movie(self, movie):
+    with open(self.movie_file, "a") as file:
+        show_times = ";".join(movie.show_times)
+        file.write(f"{movie.movie_id},{movie.title},{movie.price},{movie.release_date},{show_times}\n")
+    
+    def make_booking(self, booking):
+    # check if seats are available for the showtime
+        movie_id = booking.movie_id
+        showtime = booking.time
+    for movie in self.movies:
+        if movie.movie_id == movie_id:
+            if showtime in movie.show_times:
+                if self.theater.num_seats > 0:
+                    # make the reservation
+                    new_booking = Booking(transaction_id, customer_name, date, time, movie_id)
+                    self.bookings.append(new_booking)
+                    self.write_booking(new_booking)
+                    self.theater.num_seats -= 1
+                    
+                    # update seats array
+                    row = ...  # calculate row for the booking
+                    seat_num = ...  # calculate seat number for the booking
+                    self.theater.seats[row][seat_num] = 1
+                    
+                    return "Booking successful!"
+                    
+                else:
+                    # no seats available
+                    raise Exception("Booking failed - no seats available")
+            
+    # movie or showtime not found
+    raise Exception("Booking failed - movie or showtime not found")
+
+    
+    def write_movie(self, movie):
+        try:
+            with open(self.movie_file, "a") as file:
+                show_times = ";".join(movie.show_times)
+            file.write(f"{movie.movie_id},{movie.title},{movie.price},{movie.release_date},{show_times}\n")
+        except:
+        print("Error: could not write movie to file.")
+    
